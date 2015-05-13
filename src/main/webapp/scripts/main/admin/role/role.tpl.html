@@ -1,0 +1,228 @@
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item"><b>用户权限</b><a class="pull-right" ng-click="addRole()"><span
+                    class="glyphicon glyphicon-plus"></span></a></li>
+                <li class="list-group-item"><input class="form-control" type="text" ng-model="filter.roleName" placeholder="过滤用户权限组"/> </li>
+                <a href="#" class="list-group-item" ng-repeat="role in allRoles | filter: { name: filter.roleName}" ng-click="editRole(role)">{{ role.name }}</a>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 ng-show="isAdd">新增用户权限组</h4>
+                    <h4 ng-hide="isAdd">更新用户权限组</h4>
+                </div>
+                <div class="panel-body">
+                    <form role="form" name="roleForm" novalidate>
+                        <div class="form-group" ng-class="{'has-error' : roleForm.name.$invalid && roleForm.name.$dirty}">
+                            <label for="name" class="control-label">用户权限组名称</label>
+                            <input type="text" class="form-control" id="name" name="name" ng-model="role.name" required unique-role="role.name" ng-model-options="{ debounce: 500}"/>
+                            <div class="help-block" ng-messages="roleForm.name.$error" ng-if="roleForm.name.$invalid && roleForm.name.$dirty">
+                                <div ng-message="required">请输入用户权限组名称</div>
+                                <div ng-message="uniqueRole">用户权限组名称已经存在</div>
+                            </div>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th colspan="2">系统管理</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="checkbox"><label>
+                                        <input
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="SYSTEM"
+                                            ng-checked="role.rights.indexOf('SYSTEM') > -1"
+                                            ng-click="toggleRight('SYSTEM')"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.SYSTEM' | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>企业基础信息模块</th>
+                                <th>企业税收信息</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('CM')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                    <label for="blocks" class="col-sm-4">管理区块</label>
+                                    <select id="blocks"
+                                            class="col-sm-8"
+                                            chosen multiple
+                                            data-placeholder="{{ 'role.form.select.block.placeholder' | translate }}"
+                                            chosen-search-message="{{ 'role.form.select.block.search_result_message' | translate }}"
+                                            ng-model="role.blocks"
+                                            ng-options="right as 'role.data.rights.' + right | translate for right in getRightsByModule('BLOCK')">
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('TAX')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th>企业安检信息</th>
+                                <th>商业管理</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('SECURITY')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('CA')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th>农业信息</th>
+                                <th>项目信息</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('AGRI')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('PM')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th>报表统计</th>
+                                <th>信息发布</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('RM')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                                <td>
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('INFO')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th colspan="2">企业税收信息</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="checkbox" ng-repeat="right in getRightsByModule('DEPARTMENT')"><label>
+                                        <input ng-disabled="role.rights.indexOf('SYSTEM') > -1"
+                                            type="checkbox"
+                                            name="selectedRights[]"
+                                            value="{{right}}"
+                                            ng-checked="role.rights.indexOf(right) > -1"
+                                            ng-click="toggleRight(right)"
+                                            ng-required="!role.rights"
+                                            /> {{ 'role.data.rights.' + right | translate }}
+                                    </label></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="button-group-float">
+                            <button type="submit" class="btn btn-primary" translate="common.form.submit" ng-click="submit()">Submit</button>
+                            <button type="reset" class="btn btn-default" translate="common.form.reset" ng-click="resetForm()"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

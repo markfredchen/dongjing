@@ -1,0 +1,22 @@
+<div class="main">
+    <header>
+
+    </header>
+    <div class="navigation-bar" ui-view="navbar"/>
+    <div class="container">
+        <div class="row">
+            <div class="user-menu">
+                <span class="user-menu-section">
+                    <span class="glyphicon glyphicon-info-sign"></span> 欢迎，<span>系统管理员</span>
+                </span>
+                <span class="user-menu-section"><a>修改密码</a></span>
+                <span class="user-menu-section last"><a>退出登陆</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div ui-view="content"/>
+        </div>
+    </div>
+</div>

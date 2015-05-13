@@ -1,0 +1,9 @@
+spring:
+    datasource:
+        url: jdbc:h2:mem:dongjing
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+hibernate.show_sql: true

@@ -1,0 +1,103 @@
+{
+    "role": {
+        "form": {
+            "select": {
+                "block": {
+                    "search_result_message": "\u672A\u641C\u7D22\u5230\u7ED3\u679C\u3002\u641C\u7D22\u6761\u4EF6:",
+                    "placeholder": "\u8BF7\u9009\u62E9\u7BA1\u7406\u533A\u5757(\u53EF\u591A\u9009)"
+                }
+            }
+        },
+        "data": {
+            "rights": {
+                "SYSTEM": "\u7CFB\u7EDF\u7BA1\u7406\u5458",
+                "CM": {
+                    "CHANGE_COMPANY": "\u521B\u5EFA\u4FEE\u6539\u4F01\u4E1A\u57FA\u7840\u4FE1\u606F",
+                    "VIEW_COMPANY": "\u67E5\u770B\u4F01\u4E1A\u57FA\u7840\u4FE1\u606F",
+                    "IMPORT_COMPANY": "\u5BFC\u5165\u4F01\u4E1A\u57FA\u7840\u4FE1\u606F",
+                    "EXPORT_COMPANY": "\u5BFC\u51FA\u4F01\u4E1A\u57FA\u7840\u4FE1\u606F",
+                    "BLOCK1": "\u533A\u57571",
+                    "BLOCK2": "\u533A\u57572",
+                    "BLOCK3": "\u533A\u57573",
+                    "BLOCK4": "\u533A\u57574",
+                    "BLOCK5": "\u533A\u57575",
+                    "BLOCK6": "\u533A\u57576",
+                    "BLOCK7": "\u533A\u57577",
+                    "BLOCK8": "\u533A\u57578",
+                    "BLOCK9": "\u533A\u57579",
+                    "BLOCK10": "\u533A\u575710",
+                    "BLOCK11": "\u533A\u575711",
+                    "BLOCK12": "\u533A\u575712",
+                    "BLOCK13": "\u533A\u575713",
+                    "BLOCK14": "\u533A\u575714",
+                    "BLOCK15": "\u533A\u575715",
+                    "BLOCK16": "\u533A\u575716",
+                    "BLOCK17": "\u533A\u575717",
+                    "BLOCK18": "\u533A\u575718",
+                    "BLOCK19": "\u533A\u575719"
+                },
+                "TAX": {
+                    "VIEW": "\u67E5\u770B\u4F01\u4E1A\u7A0E\u6536\u4FE1\u606F",
+                    "IMPORT": "\u5BFC\u5165\u4F01\u4E1A\u7A0E\u6536\u4FE1\u606F"
+                },
+                "SECURITY": {
+                    "CHANGE": "\u521B\u5EFA\u4FEE\u6539\u4F01\u4E1A\u5B89\u68C0\u4FE1\u606F",
+                    "VIEW": "\u67E5\u770B\u4F01\u4E1A\u5B89\u68C0\u4FE1\u606F"
+                },
+                "CA": {
+                    "CHANGE": "\u521B\u5EFA\u4FEE\u6539\u5546\u4E1A\u8857/\u533A\u5757",
+                    "VIEW": "\u67E5\u770B\u5546\u4E1A\u8857/\u533A\u5757"
+                },
+                "AGRI": {
+                    "CHANGE": "\u521B\u5EFA\u4FEE\u6539\u519C\u4E1A\u4FE1\u606F",
+                    "VIEW": "\u67E5\u770B\u519C\u4E1A\u4FE1\u606F"
+                },
+                "PM": {
+                    "CHANGE": "\u521B\u5EFA\u4FEE\u6539\u9879\u76EE\u4FE1\u606F",
+                    "VIEW": "\u67E5\u770B\u9879\u76EE\u4FE1\u606F"
+                },
+                "RM": {
+                    "BKX": "\u767E\u9897\u661F\u7A0E\u52A1\u62A5\u8868",
+                    "OVERALL": "\u7EFC\u5408\u62A5\u8868",
+                    "APPLY.STATUS": "\u4F01\u4E1A\u7533\u62A5\u9879\u76EE\u6C47\u603B",
+                    "COMPANY.AREA": "\u4F01\u4E1A\u9762\u79EF\u6C47\u603B"
+                },
+                "INFO": {
+                    "SMS": "\u77ED\u4FE1\u7FA4\u53D1",
+                    "EMAIL": "\u90AE\u4EF6\u7FA4\u53D1"
+                },
+                "DEPARTMENT": {
+                    "JFB": "\u7ECF\u53D1\u529E",
+                    "CZS": "\u8D22\u653F\u6240",
+                    "AJS": "\u5B89\u76D1\u6240",
+                    "BKX": "\u767E\u9897\u661F",
+                    "JGS": "\u7ECF\u7BA1\u6240",
+                    "MYC": "\u8D38\u6613\u57CE",
+                    "NFGS": "\u519C\u526F\u516C\u53F8",
+                    "ZHDW": "\u7ECF\u53D1\u529E"
+                },
+                "BLOCK": {
+                    "BL1": "\u533A\u57571",
+                    "BL2": "\u533A\u57572",
+                    "BL3": "\u533A\u57573",
+                    "BL4": "\u533A\u57574",
+                    "BL5": "\u533A\u57575",
+                    "BL6": "\u533A\u57576",
+                    "BL7": "\u533A\u57577",
+                    "BL8": "\u533A\u57578",
+                    "BL9": "\u533A\u57579",
+                    "BL10": "\u533A\u575710",
+                    "BL11": "\u533A\u575711",
+                    "BL12": "\u533A\u575712",
+                    "BL13": "\u533A\u575713",
+                    "BL14": "\u533A\u575714",
+                    "BL15": "\u533A\u575715",
+                    "BL16": "\u533A\u575716",
+                    "BL17": "\u533A\u575717",
+                    "BL18": "\u533A\u575718",
+                    "BL19": "\u533A\u575719"
+                }
+            }
+        }
+    }
+}
