@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -67,10 +69,7 @@ public class RoleController extends BaseController {
         List<Role> roles = roleService.getAllRoles();
         List<RoleResource> response = new ArrayList<>();
         RoleResourceAsm asm = new RoleResourceAsm();
-        for (Role role : roles) {
-            response.add(asm.toResource(role));
-        }
-
+        response.addAll(roles.stream().map(asm::toResource).collect(Collectors.toList()));
         return response;
     }
 

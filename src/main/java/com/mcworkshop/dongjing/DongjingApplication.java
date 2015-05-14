@@ -4,10 +4,13 @@ import com.mcworkshop.dongjing.domain.Right;
 import com.mcworkshop.dongjing.domain.Role;
 import com.mcworkshop.dongjing.domain.User;
 import com.mcworkshop.dongjing.persistence.repository.RightRepository;
+import com.mcworkshop.dongjing.persistence.repository.UserRepository;
+import com.mcworkshop.dongjing.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Arrays;
@@ -15,11 +18,18 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.mcworkshop.dongjing")
 @EnableJpaRepositories(basePackages = "com.mcworkshop.dongjing.persistence")
 public class DongjingApplication implements CommandLineRunner {
 
     @Autowired
     RightRepository rightRepository;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(DongjingApplication.class, args);
@@ -71,19 +81,21 @@ public class DongjingApplication implements CommandLineRunner {
             "CM.EXPORT_COMPANY",
             "TAX.VIEW",
             "TAX.IMPORT",
-            "PM.VIEW");
+            "PM.VIEW",
+            "SYSTEM");
         for (String right : rights) {
             rightRepository.save(new Right(right));
         }
-        Right system = new Right("SYSTEM");
-        rightRepository.save(system);
         Role role = new Role();
         role.setRoleOID(UUID.randomUUID());
         role.setName("Admin");
-        role.getRights().add(system);
+        role.getRights().add(rightRepository.findOneByName("SYSTEM"));
+        roleService.createRole(role);
         User user = new User();
         user.setUserOID(UUID.randomUUID());
         user.setUsername("admin");
-//        user.setPassword();
+        user.setPassword("123456");
+        user.setEmail("test@test.com");
+        userRepository.save(user);
     }
 }

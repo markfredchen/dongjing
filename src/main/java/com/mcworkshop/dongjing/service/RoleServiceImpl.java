@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by markfredchen on 3/27/15.
  */
-@Service
+@Service("roleService")
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RightRepository rightRepository;

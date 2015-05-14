@@ -10,4 +10,6 @@ import java.util.Set;
  */
 public interface RightRepository extends JpaRepository<Right, Long> {
     Set<Right> findByNameIn(Set<String> names);
+
+    Right findOneByName(String name);
 }

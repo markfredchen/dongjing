@@ -3,6 +3,7 @@ package com.mcworkshop.dongjing.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class Role extends BaseEntity{
             joinColumns = @JoinColumn(name = "roleID", referencedColumnName = "roleID"),
             inverseJoinColumns = @JoinColumn(name = "rightID", referencedColumnName = "rightID")
     )
-    private Set<Right> rights;
+    private Set<Right> rights = new HashSet<>();
 
     public Long getRoleID() {
         return roleID;

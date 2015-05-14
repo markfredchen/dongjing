@@ -1,76 +1,48 @@
-package com.mcworkshop.dongjing.domain;
+package com.mcworkshop.dongjing.web.api.resource;
 
-import javax.persistence.*;
+import com.mcworkshop.dongjing.domain.Role;
+import com.mcworkshop.dongjing.domain.User;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- * Created by markfredchen on 4/11/15.
+ * Created by markfredchen on 5/13/15.
  */
-@Entity
-@Table(name = "T_USER")
-public class User extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userID;
+public class UserResource extends BaseResource {
+
+    private String  userOID;
 
     @NotNull
-    private UUID userOID;
-
-    @NotNull
-    @Size(max = 50)
-    @Column(unique = true, updatable = false)
     private String username;
 
     @NotNull
-    @Size(max = 255)
     private String password;
 
-    @Size(max = 100)
-    @Column(unique = true)
     private String email;
 
-    @Size(max = 50)
     private String firstName;
 
-    @Size(max = 50)
     private String lastName;
 
-    @Size(max = 50)
-    private String phone;
-
-    @Size(max = 50)
     private String cellPhone;
 
-    @Size(max = 50)
+    private String phone;
+
     private String title;
 
-    @Size(max = 50)
     private String department;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinTable(name = "T_USER_ROLE",
-        joinColumns = @JoinColumn(name = "userID", referencedColumnName = "userID"),
-        inverseJoinColumns = @JoinColumn(name = "roleID", referencedColumnName = "roleID")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @NotNull
+    private Set<String> roleOIDs;
 
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
-    }
-
-    public UUID getUserOID() {
+    public String getUserOID() {
         return userOID;
     }
 
-    public void setUserOID(UUID userOID) {
+    public void setUserOID(String userOID) {
         this.userOID = userOID;
     }
 
@@ -114,20 +86,20 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getCellPhone() {
         return cellPhone;
     }
 
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getTitle() {
@@ -146,11 +118,34 @@ public class User extends BaseEntity {
         this.department = department;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<String> getRoleOIDs() {
+        return roleOIDs;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoleOIDs(Set<String> roleOIDs) {
+        this.roleOIDs = roleOIDs;
+    }
+
+    @Override
+    public User toEntity() {
+        User user = new User();
+        if(userOID != null) {
+            user.setUserOID(UUID.fromString(userOID));
+        }
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setCellPhone(cellPhone);
+        user.setPhone(phone);
+        user.setTitle(title);
+        user.setDepartment(department);
+        user.setRoles(roleOIDs.stream().map(roleOID -> {
+            Role role = new Role();
+            role.setRoleOID(UUID.fromString(roleOID));
+            return role;
+        }).collect(Collectors.toSet()));
+        return user;
     }
 }
